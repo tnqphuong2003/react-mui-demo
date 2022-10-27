@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Pagination } from "@mui/material";
+import React from "react";
+import JobItem from "./components/JobItem";
+import SearchAppBar from "./components/SearchAppBar";
+import jobs from "./jobs.json";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <SearchAppBar />
+      <div style={{ maxWidth: "1150px", margin: "auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            margin: "3rem",
+            gap: "3rem",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          {jobs.slice(0, 5).map((job) => (
+            <JobItem job={job} />
+          ))}
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <Pagination
+            count={10}
+            color="error"
+            sx={{ button: { color: "#ffffff" } }}
+          />
+        </Box>
+      </div>
     </div>
   );
 }
